@@ -1,0 +1,8 @@
+{
+  "name": "red_carpet_up",
+  "version": "1.0.0",
+  "description": "A simple loan management system",
+  "main": "index.ts",
+  "author": "The_philosopher",
+  "license": "MIT"
+}

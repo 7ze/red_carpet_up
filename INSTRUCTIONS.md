@@ -4,7 +4,8 @@ RedCarpet was recently voted as the 30 best [startups in India](https://inc42.co
 
 Some of the press around what we are doing is here.
 
-- [Google Launchpad best startup feature](https://yourstory.com/2016/05/google-launchpad-india-2016/)  [](https://youtu.be/xoZsNN9UGlQ?t=301)
+- [Google Launchpad best startup feature](https://yourstory.com/2016/05/google-launchpad-india-2016/).
+  [More on this](https://youtu.be/xoZsNN9UGlQ?t=301)
 - [Showcased at GES innovation summit for the PMO](https://twitter.com/DIPPGOI/status/938345126526459905/photo/1)
 - [An article by IndiaTimes](https://economictimes.indiatimes.com/small-biz/startups/newsbuzz/fintech-startup-redcarpet-collaborates-with-neostencil-to-provide-student-loan-for-premium-government-job-tuition-fee/articleshow/65245884.cms)
 
@@ -41,7 +42,7 @@ this README file in your codebase itself.
    packaging of software to make it easy to develop and use. We expect you to do
    the same. Learning Docker isnt very hard. It takes an hour at most. Some examples
    are - [nodejs-docker](https://nodejs.org/en/docs/guides/nodejs-docker-webapp),
-   [docker-go-applications](https://blog.codeship.com/building-minimal-docker-containers-for-go-applications) ,
+   [docker-go-applications](https://blog.codeship.com/building-minimal-docker-containers-for-go-applications),
    [docker-flask](https://www.fullstackpython.com/blog/develop-flask-web-apps-docker-containers-macos.html),
    [An interesting medium article](https://medium.com/@jhh3/all-the-small-things-86a8f2b3f67).
    You dont need to create an image and upload to a registry, just make sure the
@@ -51,9 +52,9 @@ this README file in your codebase itself.
    roles are "customer", "agent" and "admin". We want to see how you are creating
    /salting/hashing the passwords. Another question to think about is - how will
    you set the role of a user ? All of these are questions you should think about.
-4. Your api needs to be protected by authentication.  For all the  API you will
+4. Your api needs to be protected by authentication. For all the API you will
    build, design an auth system. We want to see how you do this. Will you use a
-   token? a username/password ?  Are you using JWT? remember that for API, you
+   token? a username/password ? Are you using JWT? remember that for API, you
    cant have cookies. How will you handle roles in an API? Will you only ask for
    authentication once or will every api call be authenticated. All of these are
    questions you should think about.
@@ -63,8 +64,8 @@ this README file in your codebase itself.
 
 ### Features
 
-1. List, view and edit users -  this can only be done by "agent" and "admin" roles
-1. Create a loan request on behalf of the user -  This can only be done by "agent"
+1. List, view and edit users - this can only be done by "agent" and "admin" roles
+1. Create a loan request on behalf of the user - This can only be done by "agent"
    role. Inputs would be tenure selected (in months) and interest to be charged every
    month. Loan can have 3 states - "NEW", "REJECTED", "APPROVED".
    NOTE: we expect you to figure out what a "loan" object will look like. EMI,
@@ -74,13 +75,13 @@ this README file in your codebase itself.
    interested to see this code, since date handling is one of the trickiest things
    here (is it needed to handle timezone information in your database ?)
 1. Approval of loan request - This can only be done by an "admin" role.
-   Edit a loan (but not after it has been approved) -  This can be done only by
+   Edit a loan (but not after it has been approved) - This can be done only by
    "agent" role. But cannot be done if loan is in "Approved" state. IMPORTANT:
    We want to see how you design this. Can you save previous history ? In an extreme
    situation, can you "rollback" the changes ? Hint: the best designs here use
    "double safety" - logic in the code as well as database constraints.
 1. Ability to list and view loans (approved) or loan requests based on the filter
-   applied -  By "filter" we mean - select by date of creation, date of update,
+   applied - By "filter" we mean - select by date of creation, date of update,
    state of loan (NEW, REJECTED, APPROVED), etc. This action can be done by all
    : "customer", "agent" and "admin" roles. HOWEVER - "customer" can only see his
    own loans...while "agent" and "admin" can see everyone's loans. The way you
@@ -91,7 +92,8 @@ this README file in your codebase itself.
 ### Testcases
 
 Writing testcases are a cultural value and a hard requirement at RedCarpet. We
-wish to see the same. We prefer good testcases for less features, rather than no testcases and more features.
+wish to see the same. We prefer good testcases for less features, rather than no
+testcases and more features.
 
 We dont expect you send a database dump for testing. All frameworks allow you to
 "mock" data (or fixtures).

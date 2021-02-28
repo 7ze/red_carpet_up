@@ -2,7 +2,20 @@
   "name": "red_carpet_up",
   "version": "1.0.0",
   "description": "A simple loan management system",
-  "main": "index.ts",
+  "main": "app.js",
   "author": "The_philosopher",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }

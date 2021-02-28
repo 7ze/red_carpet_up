@@ -1,4 +1,4 @@
-const { registerUser } = require("../services/userAuthentication");
+const { registerUser } = require("../services");
 
 const register = async (req, res, next) => {
   const statusCode = await registerUser(req.body);

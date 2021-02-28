@@ -1,11 +1,7 @@
 const { Pool } = require("pg");
+require("dotenv").config();
 
-const pool = new Pool({
-  user: "postgres",
-  database: "loan_db",
-  host: "localhost",
-  port: 5432,
-});
+const pool = new Pool();
 
 module.exports = {
   async query(text, params) {

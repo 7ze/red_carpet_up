@@ -9,23 +9,21 @@ const hash_password = async (password) => {
 const userExists = async (username) => {
   const { rowCount } = await db.query(
     "select * from users where username = $1",
-    username
+    [username]
   );
   return rowCount > 0 ? true : false;
 };
 
 const registerUser = async (user) => {
-  const [username, name, password, role] = user;
-  if (userExists) return { message: "Bad request." };
+  const { username, name, password, role } = user;
+  if (await userExists(username)) return 400;
   else {
     const hashed_password = await hash_password(password);
-    return await db.query(
+    await db.query(
       "insert into users (username, name, password, role) values ($1, $2, $3, $4)",
-      username,
-      name,
-      hashed_password,
-      role
+      [username, name, hashed_password, role]
     );
+    return 200;
   }
 };
 

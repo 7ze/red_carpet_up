@@ -6,8 +6,8 @@
   "author": "The_philosopher",
   "license": "MIT",
   "scripts": {
-    "start": "node app.mjs",
-    "dev": "nodemon app.mjs"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

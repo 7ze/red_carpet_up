@@ -13,6 +13,7 @@ module.exports = {
       return res;
     } catch (e) {
       console.error(e.stack);
+      return 400;
     }
   },
 };

@@ -15,14 +15,13 @@ const userExists = async (username) => {
 };
 
 const registerUser = async (user) => {
+  const insertQuery =
+    "insert into users (username, name, password, role) values ($1, $2, $3, $4)";
   const { username, name, password, role } = user;
   if (await userExists(username)) return 400;
   else {
     const hashed_password = await hash_password(password);
-    await db.query(
-      "insert into users (username, name, password, role) values ($1, $2, $3, $4)",
-      [username, name, hashed_password, role]
-    );
+    await db.query(insertQuery, [username, name, hashed_password, role]);
     return 200;
   }
 };

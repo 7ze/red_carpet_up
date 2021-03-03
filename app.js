@@ -1,6 +1,6 @@
-import express from 'express';
-import helmet from 'helmet';
-import morgan from 'morgan';
+const express = require('express');
+const helmet = require('helmet');
+const morgan = require('morgan');
 
 const app = express();
 

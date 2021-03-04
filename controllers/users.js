@@ -1,11 +1,9 @@
-async function register(req, res, next) {
+async function register(req, res) {
   res.send('register');
-  next();
 }
 
-async function login(req, res, next) {
+async function login(req, res) {
   res.send('login');
-  next();
 }
 
 module.exports = { register, login };

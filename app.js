@@ -10,9 +10,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // routes
-app.get('/api', (_, res) => {
-  res.json({ message: 'Hello, World!' });
-});
+app.use('/api', require('./routes'));
 
 const PORT = process.env.PORT ?? 8080;
 app.listen(PORT, () =>

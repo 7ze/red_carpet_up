@@ -4,6 +4,7 @@ const {
   insert_user,
   server_error,
   successul_query,
+  check_user_password,
 } = require('./library');
 
 async function register_user(user) {
@@ -28,4 +29,24 @@ async function register_user(user) {
   }
 }
 
-module.exports = { register_user };
+async function authenticate_user_login(user) {
+  try {
+    if (await check_if_user_exists(user.username)) {
+      const response = await check_user_password(user);
+      return [null, response];
+    } else {
+      throw {
+        custom_error: true,
+        status: 400,
+        response: {
+          message: 'No user found!',
+        },
+      };
+    }
+  } catch (err) {
+    console.error(err);
+    return err.custom_error ? [err] : [server_error];
+  }
+}
+
+module.exports = { register_user, authenticate_user_login };

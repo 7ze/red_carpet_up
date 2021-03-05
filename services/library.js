@@ -34,10 +34,25 @@ async function insert_user(user) {
   await db.query(insert_user_query, user);
 }
 
+async function check_user_password(user) {
+  const { username, password } = user;
+  const {
+    rows,
+  } = await db.query('select password from users where username = $1', [
+    username,
+  ]);
+  if (await bcrypt.compare(password, rows[0].password)) {
+    return { status: 200, response: { message: 'Login successful' } };
+  } else {
+    return { status: 400, response: { message: 'Invalid credentials' } };
+  }
+}
+
 module.exports = {
   hash_password,
   check_if_user_exists,
   insert_user,
   server_error,
   successul_query,
+  check_user_password,
 };

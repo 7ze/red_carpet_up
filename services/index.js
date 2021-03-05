@@ -1,3 +1,4 @@
+const db = require('../db');
 const {
   hash_password,
   check_if_user_exists,
@@ -6,6 +7,19 @@ const {
   successul_query,
   check_user_password,
 } = require('./library');
+
+async function get_users() {
+  try {
+    const { rows } = await db.query(
+      'select id, username,name, role, createdat from users'
+    );
+    result = { status: 200, response: rows };
+    return [null, result];
+  } catch (err) {
+    console.error(err);
+    return [server_error];
+  }
+}
 
 async function register_user(user) {
   try {
@@ -49,4 +63,4 @@ async function authenticate_user_login(user) {
   }
 }
 
-module.exports = { register_user, authenticate_user_login };
+module.exports = { get_users, register_user, authenticate_user_login };

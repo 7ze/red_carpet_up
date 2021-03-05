@@ -1,4 +1,14 @@
-const { register_user, authenticate_user_login } = require('../services');
+const {
+  register_user,
+  authenticate_user_login,
+  get_users,
+} = require('../services');
+
+async function users(req, res) {
+  const [error, result] = await get_users();
+  if (error) res.error(error.status).json(error.response);
+  else res.status(result.status).json(result.response);
+}
 
 async function register(req, res) {
   const [error, result] = await register_user(req.body);
@@ -12,4 +22,4 @@ async function login(req, res) {
   else res.status(result.status).json(result.response);
 }
 
-module.exports = { register, login };
+module.exports = { users, register, login };

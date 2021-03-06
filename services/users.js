@@ -6,6 +6,7 @@ const {
   server_error,
   successul_query,
   check_user_password,
+  authorize,
 } = require('./library');
 
 async function get_users() {
@@ -47,6 +48,7 @@ async function authenticate_user_login(user) {
   try {
     if (await check_if_user_exists(user.username)) {
       const response = await check_user_password(user);
+      if (response.status == '200') authorize(user);
       return [null, response];
     } else {
       throw {

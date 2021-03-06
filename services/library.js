@@ -1,4 +1,6 @@
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const db = require('../db');
 
 const server_error = {
@@ -48,6 +50,12 @@ async function check_user_password(user) {
   }
 }
 
+async function authorize(username) {
+  const user = { name: username };
+  const access_token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+  console.log(access_token);
+}
+
 module.exports = {
   hash_password,
   check_if_user_exists,
@@ -55,4 +63,5 @@ module.exports = {
   server_error,
   successul_query,
   check_user_password,
+  authorize,
 };

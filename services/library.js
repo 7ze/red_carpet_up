@@ -17,6 +17,14 @@ const successul_query = {
   },
 };
 
+const invalid_token_error = {
+  custom_error: true,
+  status: 401,
+  response: {
+    message: 'Invalid refresh token',
+  },
+};
+
 async function hash_password(password) {
   const saltRounds = 10;
   return await bcrypt.hash(password, saltRounds);
@@ -50,10 +58,48 @@ async function check_user_password(user) {
   }
 }
 
-async function authorize(username) {
+function generate_access_token(username) {
   const user = { name: username };
-  const access_token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-  console.log(access_token);
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: '20s',
+  });
+}
+
+async function generate_refresh_token(username) {
+  const user = { name: username };
+  const refresh_token = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+  const update_token_query =
+    'update users set refresh_token = $1 where username = $2';
+  await db.query(update_token_query, [refresh_token, username]);
+  return refresh_token;
+}
+
+async function verify_token(refresh_token, username) {
+  const {
+    rows,
+  } = await db.query('select refresh_token from users where username = $1', [
+    username,
+  ]);
+  if (rows[0].refresh_token === refresh_token) {
+    const access_token = jwt.verify(
+      refresh_token,
+      process.env.REFRESH_TOKEN_SECRET,
+      (err, user) => {
+        if (err) return [err];
+        const access_token = generate_access_token(user.name);
+        return access_token;
+      }
+    );
+    return [null, access_token];
+  } else {
+    return [{ message: 'Invalid token' }];
+  }
+}
+
+async function delete_token(username) {
+  await db.query('update users set refresh_token = null where username = $1', [
+    username,
+  ]);
 }
 
 module.exports = {
@@ -61,7 +107,11 @@ module.exports = {
   check_if_user_exists,
   insert_user,
   server_error,
+  invalid_token_error,
   successul_query,
   check_user_password,
-  authorize,
+  generate_access_token,
+  generate_refresh_token,
+  verify_token,
+  delete_token,
 };

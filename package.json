@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node app",
-    "dev": "nodemon app"
+    "start-auth": "node auth_server",
+    "dev": "nodemon app",
+    "dev-auth": "nodemon auth_server"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

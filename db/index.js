@@ -12,3 +12,19 @@ module.exports = {
     return res;
   },
 };
+
+/**
+ *
+ * Users Model
+ * --------------------------------------
+ * create table users (
+ * id serial primary key,
+ * username varchar(100) not null unique,
+ * name varchar(100) not null,
+ * password varchar(150) not null,
+ * role varchar(20) not null,
+ * refresh_token varchar(300),
+ * createdat date default now() not null
+ * );
+ *
+ */
